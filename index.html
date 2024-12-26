@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Latest news and updates on regenerative therapies, including stem cell research, tissue regeneration, and gene therapy.">
+    <meta name="keywords" content="regenerative medicine, stem cell research, tissue regeneration, gene therapy, clinical trials, regenerative therapies news">
+    <title>Regenerative Therapies News</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Regenerative Therapies News</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <h2>Breaking News & Key Updates</h2>
+            <div id="newsContainer">
+                <!-- News articles will be inserted here -->
+            </div>
+        </section>
+
+        <section id="categories">
+            <h2>Categories</h2>
+            <div class="categories-list">
+                <div class="category">
+                    <h3>Stem Cell Therapy</h3>
+                    <p>Explore the latest research and clinical applications of stem cell therapy.</p>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="category">
+                    <h3>Tissue Regeneration</h3>
+                    <p>Discover breakthroughs in regenerating damaged tissues using innovative therapies.</p>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="category">
+                    <h3>Gene Therapy</h3>
+                    <p>Find out how gene therapy is reshaping the field of regenerative medicine.</p>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="category">
+                    <h3>Clinical Trials</h3>
+                    <p>Stay updated on the latest clinical trials and their outcomes in regenerative therapies.</p>
+                    <a href="#">Learn More</a>
+                </div>
+                <div class="category">
+                    <h3>Latest Research</h3>
+                    <p>Access the newest studies, papers, and journals in regenerative medicine.</p>
+                    <a href="#">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog">
+            <h2>Blog & Articles</h2>
+            <div class="blog-posts">
+                <!-- Example blog post -->
+                <article>
+                    <h3>Interview with Dr. Jane Doe: The Future of Stem Cell Research</h3>
+                    <p>We sat down with Dr. Jane Doe, a leading researcher in stem cell therapy, to discuss the potential of regenerative medicine...</p>
+                    <a href="#">Read more</a>
+                </article>
+                <article>
+                    <h3>Case Study: Regenerative Treatment for Cartilage Damage</h3>
+                    <p>Learn how regenerative therapies are providing new hope for patients suffering from cartilage damage...</p>
+                    <a href="#">Read more</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="resources">
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="#">Scientific Journal: Stem Cell Research</a></li>
+                <li><a href="#">Webinar: Future of Regenerative Medicine</a></li>
+                <li><a href="#">Educational Materials on Tissue Engineering</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Regenerative Therapies News</p>
+            <p>Follow us on social media:</p>
+            <ul class="social-links">
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Facebook</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- JavaScript to fetch and display news -->
+    <script>
+    const apiKey = 'f395943f590b4aecb834257d3c3f322d';
+
+    // Function to fetch news articles
+    async function fetchNews() {
+        const url = `https://newsapi.org/v2/everything?q=regenerative+medicine&apiKey=${apiKey}`;
+
+        try {
+            // Fetch the news data
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (data.status === 'ok') {
+                displayNews(data.articles);
+            } else {
+                console.log('Error fetching news:', data.message);
+            }
+        } catch (error) {
+            console.log('Error:', error);
+        }
+    }
+
+    // Function to display news articles
+    function displayNews(articles) {
+        const newsContainer = document.getElementById('newsContainer');
+        newsContainer.innerHTML = '';  // Clear any existing content
+
+        // Loop through articles and create HTML elements for each one
+        articles.forEach(article => {
+            const articleElement = document.createElement('article');
+            articleElement.classList.add('news-article');
+            
+            const articleTitle = document.createElement('h3');
+            articleTitle.textContent = article.title;
+
+            const articleDescription = document.createElement('p');
+            articleDescription.textContent = article.description;
+
+            const articleLink = document.createElement('a');
+            articleLink.href = article.url;
+            articleLink.target = '_blank';
+            articleLink.textContent = 'Read more';
+
+            articleElement.appendChild(articleTitle);
+            articleElement.appendChild(articleDescription);
+            articleElement.appendChild(articleLink);
+
+            newsContainer.appendChild(articleElement);
+        });
+    }
+
+    // Call fetchNews function when the page loads
+    document.addEventListener('DOMContentLoaded', fetchNews);
+    </script>
+</body>
+</html>
